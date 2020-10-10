@@ -24,8 +24,6 @@ $ go fmt main.go
 ```
 
 
-:::::::::::::: {.columns .onlytextwidth}
-::: {.column width="45%" align=center}
 Codice prima della formattazione:
 ```go
 package main
@@ -34,13 +32,7 @@ func main() {
 fmt.Prinln("Hello world!")
      }
 ```
-:::
-::: {.column width="10%" align=center}
-```text
-->
-```
-:::
-::: {.column width="45%" align=center}
+
 Codice dopo la formattazione
 ```go
 package main
@@ -51,8 +43,6 @@ func main() {
     fmt.Prinln("Hello world!")
 }
 ```
-:::
-::::::::::::::
 
 ## Go doc
 
@@ -133,5 +123,64 @@ build treats them as a list of source files specifying a single package.
 When compiling packages, build ignores files that end in '_test.go'.
 
 ...
+```
+
+# Esercizi
+
+## Esercizio 1
+
+Usare gli strumenti `go run` e `go build` per eseguire il codice `helloworld.go`.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello World!")
+}
+```
+
+## Esercizio 2
+
+Utilizzate lo strumento `go fmt` per formattare in modo automatico il codice `formattazione.go`.
+
+```go
+package main
+import "fmt"
+func main() {
+var x int
+	x = 10
+	       var y int
+y = 10
+	fmt.Println(x+y     )
+     }
+```
+
+## Esercizio 3
+
+Lo strumento `go fmt` non è in grado di formattare il codice quando sono presenti degli errori.
+È quindi importante formattare il proprio codice durante la scrittura.
+
+Correggere gli errori del seguente codice, formattarlo ed eseguirlo.
+
+```go
+package main
+
+import fmt
+
+func main {
+
+var x int 
+x = 10
+var y int
+y = 15
+
+sum = x + y
+
+fmt.Println("La somma è ", sum
+
+}
+}
 ```
 
