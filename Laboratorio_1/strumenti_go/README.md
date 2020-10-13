@@ -18,9 +18,6 @@ main.go
 
 $ go fmt main.go
 
-
-
-
 ```
 
 
@@ -66,10 +63,8 @@ main.go
 
 $ go run main.go
 Hello world!
-
-
-
 ```
+
 
 ```go
 package main
@@ -93,8 +88,6 @@ Hello main.go
 
 $ ./Hello
 Hello world!
-
-
 ```
 
 ```go
