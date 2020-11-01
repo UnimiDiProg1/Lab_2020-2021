@@ -7,10 +7,11 @@ package main
 
 import "fmt"
 
-func test(x int) (y int, z int) {
-	y = x + 1
-	z = x + 2
-	return
+func test(x int) y int, z int
+{
+var y int = x + 1
+var z int = x + 2
+return
 }
 
 func main() {

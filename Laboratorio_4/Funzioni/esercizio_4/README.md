@@ -9,7 +9,7 @@ package main
 import "fmt"
 
 func test(x, y int) (int, int) {
-	return 2*x, 2*y
+	return 2 * x, 2 * y
 }
 
 func main() {

@@ -7,15 +7,16 @@ package main
 
 import "fmt"
 
-func test(x int) (y int) {
+func funzione1(x int) int {
+	return x * 10
+}
+
+func funzione2(x int) (y int) {
 	y = x * 10
-	x, y = y, x
 	return
 }
 
 func main() {
-	var a, b int = 10, 5
-	b = test(a)
-	fmt.Println(a, b)
+	fmt.Println(funzione1(5), funzione2(3))
 }
 ```
