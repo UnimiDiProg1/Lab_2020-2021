@@ -1,8 +1,3 @@
-# Qual è l'output?
-
-Qual è l'output del seguente programma?
-
-```go
 package main
 
 import "fmt"
@@ -29,4 +24,3 @@ func main() {
 	/* (2) - end */
 
 }
-```
