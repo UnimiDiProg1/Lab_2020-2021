@@ -104,7 +104,7 @@ import "fmt"
 func main() {
 	a := [...]int{1, 2, 3, 4, 5, 6, 7}
 
-	fmt.Printf("sl - %T: %v %d\n", a, a)
+	fmt.Printf("a - %T: %v\n", a, a)
 
 	sl1 := a[:] // slicing
 	sl2 := sl1[1:3]
