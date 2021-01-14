@@ -1,74 +1,68 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strconv"
-	"strings"
-)
-
-//import "strconv"
-//import "strings"
+import "fmt"
+import "os"
+import "bufio"
+import "strings"
+import "strconv"
 import "math"
 
-const EPSILON = 1.0e-6
-
 func main() {
-
-	punti := NuovoPercorso()
-	lunghezzaPercorso := Lunghezza(punti)
-	fmt.Printf("Lunghezza percorso: %.3f\n", lunghezzaPercorso)
-
-	for i := range punti {
-		if ÈXMaggioreDiY(Lunghezza(punti[:i+1]), lunghezzaPercorso/2) {
-			fmt.Printf("Punto oltre metà: %s\n", String(punti[i]))
+	tragitto := NuovoTragitto()
+	lunghezza := Lunghezza(tragitto)
+	fmt.Printf("Lunghezza percorso: %.3f\n", lunghezza)
+	for indice, punto := range tragitto {
+		if Lunghezza(tragitto[:indice+1]) > lunghezza/2 {
+			fmt.Println("Punto oltre metà:", String(punto))
 			break
 		}
 	}
 }
 
 type Punto struct {
-	Nome string
-	X, Y float64
+	etichetta string
+	x, y      float64
 }
 
-func NuovoPercorso() (punti []Punto) {
+func NuovoTragitto() (tragitto []Punto) {
+	righe := LeggiTesto()
+	for _, riga := range righe {
+		tragitto = append(tragitto, RigaInPunto(riga))
+	}
+	return
+}
 
+func LeggiTesto() (righe []string) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		if scanner.Text() != "" {
-			var p Punto
-			comando := strings.Split(scanner.Text(), ";")
-			p.Nome = comando[0]
-			p.X, _ = strconv.ParseFloat(comando[1], 64)
-			p.Y, _ = strconv.ParseFloat(comando[2], 64)
-
-			punti = append(punti, p)
-		}
+		righe = append(righe, scanner.Text())
 	}
 	return
 }
 
-func Distanza(p1, p2 Punto) float64 {
-	dX := p1.X - p2.X
-	dY := p1.Y - p2.Y
-	return math.Sqrt(dX*dX + dY*dY)
-}
+func RigaInPunto(riga string) Punto {
 
-func Lunghezza(punti []Punto) (lunghezza float64) {
-	precedente := punti[0]
-	for _, p := range punti[1:] {
-		lunghezza += Distanza(precedente, p)
-		precedente = p
-	}
-	return
+	componenti := strings.Split(riga, ";")
+	etichetta := componenti[0]
+	x, _ := strconv.ParseFloat(componenti[1], 64)
+	y, _ := strconv.ParseFloat(componenti[2], 64)
+
+	return Punto{etichetta, x, y}
 }
 
 func String(p Punto) string {
-	return fmt.Sprintf("%s = (%.1f, %.1f)", p.Nome, p.X, p.Y)
+	return fmt.Sprintf("%s = (%.1f, %.1f)", p.etichetta, p.x, p.y)
 }
 
-func ÈXMaggioreDiY(x, y float64) bool {
-	return (x - y) > EPSILON
+func Distanza(p1, p2 Punto) float64 {
+	deltax := p1.x - p2.x
+	deltay := p1.y - p2.y
+	return math.Sqrt(deltax*deltax + deltay*deltay)
+}
+
+func Lunghezza(tragitto []Punto) (lunghezza float64) {
+	for indice := 1; indice < len(tragitto); indice++ {
+		lunghezza += Distanza(tragitto[indice-1], tragitto[indice])
+	}
+	return
 }

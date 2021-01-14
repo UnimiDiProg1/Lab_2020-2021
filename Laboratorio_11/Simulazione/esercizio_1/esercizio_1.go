@@ -1,26 +1,38 @@
 package main
 
-import (
-	"fmt"
-	"os"
-	"unicode"
-)
+import "fmt"
+import "os"
+import "unicode"
 
 func main() {
-	for posizione, parola := range os.Args[1:] {
+
+	valori := os.Args[1:]
+
+	for posizione, parola := range valori {
 		fmt.Print(TrasformaParola(parola, posizione), " ")
 	}
+
 	fmt.Println()
 }
 
-func TrasformaParola(parola string, posizione int) (risultato string) {
-	partenza := posizione % 2
-	for i, c := range parola {
-		if (partenza+i)%2 == 0 {
-			risultato += string(unicode.ToUpper(c))
-		} else {
-			risultato += string(unicode.ToLower(c))
-		}
+func TrasformaParola(parola string, posizione int) (trasformata string) {
+	var upper bool
+	if posizione%2 == 0 {
+		upper = true
+	} else {
+		upper = false
 	}
+
+	for _, v := range parola {
+
+		if upper {
+			trasformata += string(unicode.ToUpper(v))
+		} else {
+			trasformata += string(unicode.ToLower(v))
+		}
+
+		upper = !upper
+	}
+
 	return
 }

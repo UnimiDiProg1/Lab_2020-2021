@@ -1,38 +1,31 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
+import "os"
 
 func main() {
 
-	sottosequenze := Sottosequenze(os.Args[1])
+	input := os.Args[1] // abba
 
-	StampaSottosequenze(sottosequenze, len(os.Args[1]))
-}
+	sottostringhe := make(map[string]int)
 
-func Sottosequenze(sequenza string) (sottosequenze map[string]int) {
-	sottosequenze = make(map[string]int)
-	for i, c1 := range sequenza {
-		for j, c2 := range sequenza[i+1:] {
-			if c1 == c2 {
-				sottosequenze[sequenza[i:i+j+2]]++
+	for inizio := 0; inizio < len(input); inizio++ {
+		for fine := inizio + 1; fine < len(input); fine++ {
+
+			if input[inizio] == input[fine] {
+				sottostringa := input[inizio : fine+1]
+				sottostringhe[sottostringa]++
 			}
+
 		}
+
 	}
-	return
-}
 
-func StampaSottosequenze(sottosequenze map[string]int, lunghezzaMassima int) {
-
-	for lunghezza := lunghezzaMassima; lunghezza >= 3; lunghezza-- {
-
-		for sequenza, occorrenze := range sottosequenze {
-			if len(sequenza) == lunghezza {
-				fmt.Printf("%s -> Occorrenze: %d\n", sequenza, occorrenze)
+	for lunghezza := len(input); lunghezza >= 3; lunghezza-- {
+		for sottostringa, contatore := range sottostringhe {
+			if len(sottostringa) == lunghezza {
+				fmt.Printf("%s -> Occorrenze: %d\n", sottostringa, contatore)
 			}
 		}
-
 	}
 }
